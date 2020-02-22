@@ -1,0 +1,168 @@
+	<!DOCTYPE html>
+	<html>
+	<head>
+	<meta charset="utf-8">
+	<style>
+	.axis{
+	font:10px sans-serif;
+	fill:none;
+	stroke:blue;
+	shape-rendering : crispEdges;
+	}
+	FORM{
+	position : absolute ;
+	right:200px
+	
+	}
+	</style>
+		
+	</head>
+	
+	<body>
+	<marquee>Voici les resultats des elections presidentielles ! </marquee>
+	<FORM NAME="Choix">
+<SELECT NAME="Liste" onChange="Lien()">
+<OPTION VALUE="">Choisir un candidat
+<OPTION VALUE="sonko.html">Ousmane SONKO
+<OPTION VALUE="idy.html">Idrissa SECK
+<OPTION VALUE="issa.html">Issa SALL
+<OPTION VALUE="Madicke.html">Madicke NIANG
+
+</SELECT>
+</FORM>
+	<script src="d3.js"></script>
+
+	<script>
+	function Lien() {
+	i = document.Choix.Liste.selectedIndex;
+	if (i == 0) return;
+	url = document.Choix.Liste.options[i].value;
+	parent.location.href = url;
+}
+	
+	</script>
+	<script>
+	var body=d3.select("body");
+    body.append("h1")
+    .style("color","black")
+    .style("text-align","center")
+    .text("Nombre de Voix de Macky Sall");
+	
+	//Parametrage des dimensions
+	var margin = {top:20, right:500, bottom:90, left:120},
+	width = 950, height = 950;
+	
+	
+	//Mise en place du cadre de dessin
+	var svg = d3.select("body").append("svg")
+	.attr("width",width + margin.left + margin.right)
+	.style("background-color","Snow")
+	.attr("height",height + margin.top + margin.bottom)
+	.append("g")
+	.attr("transform","translate(" + margin.left + "." + margin.top + ")");
+	/// Colorer les candidats
+	var couleur=["green","yellow","red","blue","brown","orange","gray","pink","powderBlue","Coral","teal","silver","tomato","gray"];
+	
+    var region=
+	[{"regions":"Dakar", "nom":"Dakar", "part":212355},
+	{"regions":"Diourbel", "nom":"Diourbel", "part":40501},
+	{"regions":"Fatick", "nom":"Fatick", "part":8088},
+	{"regions":"Kaffrine", "nom":"Kaffrine", "part":38874},
+	{"regions":"Kaolack", "nom":"Kaolack", "part":99376},
+	{"regions":"Kedougou", "nom":"Kedougou", "part":16153},
+	{"regions":"Kolda", "nom":"Kolda", "part":36927},
+	{"regions":"Louga", "nom":"Louga", "part":73514},
+	{"regions":"Matam", "nom":"Matam", "part":92454},
+	{"regions":"Saint-louis", "nom":"Saint-louis", "part":62788},
+	{"regions":"Sedhiou", "nom":"Sedhiou", "part":23414},
+	{"regions":"Tambacounda", "nom":"Tambacounda", "part":46096},
+	{"regions":"Thies", "nom":"Thies", "part":100422},
+	{"regions":"Ziguinchor", "nom":"Ziguinchor", "part":32846}];
+var couleurs=["Dakar","Diourbel","Fatick","Kaffrine","Kaolack","Kedougou","Kolda","Louga","Matam","Saint-louis","Sedhiou","Tambacounda","Thies","Ziguinchor"]
+	
+	//Mise en place des axes
+	var x = d3.scale.ordinal()
+		.rangeRoundBands([0,width],0.10);
+
+	
+	var y = d3.scale.linear()
+	.range([height,0]);
+	
+	var xAxis = d3.svg.axis()
+	.scale(x)
+	.orient("bottom");
+	
+	var yAxis = d3.svg.axis()
+	.scale(y)
+	.orient("left")
+	.ticks(10);
+	
+	region.forEach(function(d){
+		d.regions = d.regions;
+		d.part = +d.part;
+	});
+
+	x.domain(region.map(function(d){return d.regions;}));
+	y.domain([0,d3.max(region, function(d){return d.part;})]);
+	
+	svg.append("g")
+	.attr("class","x axis")
+	.attr("transform","translate(0,"+height+")")
+	.call(xAxis);
+	
+	svg.append("g")
+	.attr("class","y axis")
+	.call(yAxis);
+
+	
+	svg.append('text')
+    .attr('x',-500)
+    .attr('y', -70)
+    .attr('transform', 'rotate(-90)')
+    .attr('text-anchor', 'middle')
+	.style("stroke","blue")
+    .text('Nombre de Voix')
+
+svg.append('text')
+    .attr('x', 500)
+    .attr('y', 1050)
+    .attr('text-anchor', 'middle')
+	.style("stroke","blue")
+    .text('Capitales Regionales')
+	//Representation des données en bande
+	var group = svg.append("g");
+	group.selectAll("bar")
+	.data(region)
+	.enter()
+	.append("rect")
+	.attr("class","bar")
+	.attr("x",function(d){return x(d.regions);})
+	.attr("width",x.rangeBand())
+	.attr("y",function(d){return y(d.part);})
+	.attr("height",function(d){return height - y(d.part);})
+	.attr("fill",function(d,i){
+			return(couleur[i]);
+		});
+	
+	
+	var legends = svg.append("g").attr("transform", "translate(950,50)")
+.selectAll(".legends").data(region);
+
+var legend = legends.enter().append("g").classed("label", true).attr
+("transform", function(d,i){return "translate(0," + (i+1)*30 + ")";});
+
+legend.append("rect").attr("width", 15).attr("height", 15).attr("fill", function(d,i){
+			return(couleur[i]) ;});
+
+
+legend.append("text").classed("label", true).text(function(d,i){return couleurs[i];})
+ .attr("fill", function(d,i){
+			return(couleur[i]);})
+ .attr("x", 30)
+ .attr("y", 15);
+	
+	</script>
+	
+	</body>
+</html>
+

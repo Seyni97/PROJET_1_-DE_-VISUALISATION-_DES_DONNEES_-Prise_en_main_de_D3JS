@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+ <head>
+ <meta charset="utf-8"/>
+ <title>Application Client</title>
+ <style> 
+ body{
+ background-color:white;
+ color:blue;
+ margin:0px;
+ padding:0px;
+ }
+ 
+ </style>
+ </head>
+<body>
+
+<form id="formulaire" method="get" action="" border="0" >
+<label for="nom">Nom de l'employé</label><input type="text" id="nom"/><br><br>
+<label>Categorie</label><select id="categorie"><option value="categorieA"> Categorie A </option>
+<option value="categorieB"> Categorie B </option>
+<option value="categorieC"> Categorie C </option></select>
+<br><br>
+<label for="heure">Nombre d'heure<input type="text" id="heure"/> </label><br><br>
+<label>A t'il effectué des heures supplementaires </label><br>
+<input type="radio" id="ouino" name="ouino"/>Oui <br/>
+<input type="radio" id="ouino" name="ouino">Non <br/><br>
+<label>Heure sup</label><input type="number" min="0" id="hs"/><br>
+<label for="avantages">Avantages</label><input type="text" id="avantages"><br>
+<input type="button" id="ajouter">Ajouter <input type="button" id="annuler">Annuler
+</form>
+
+<table border="1" cols="4" rows="4" id="tableau">
+<tr> 
+<td>Nom</td>
+<td>Salaire</td>
+<td>RAS</td>
+<td>Salaire Net</td>
+</tr>
+
+</table>
+<script>
+window.onload=function saisie(){
+var nom=document.getElementById("nom").value;
+var heure=int(document.getElementById("heure")).value;
+var categorie=document.getElementById("categorie").value;
+var hs=int(document.getElementById("hs")).value
+var avantages=int(document.getElementById("avantages")).value;
+}
+
+function salaire_de_base(heure,categorie){
+if(categorie=="categorie A"){
+   var sdb=heure*10000;
+}
+if (categorie=="Categorie B"){
+   var sdb=heure*7500;
+}
+if(categorie=="Categorie C"){
+   var sdb=heure*5000;
+}
+   return sdb
+}
+function Heure_supplementaire(hs,sdb){
+ if hs<=5{
+ var HS=sdb+sdb*0.3*5;
+ } else {
+ var HS=sdb+sdb*0.3*5+sdb*0.45*hs-5;
+ }
+ return HS
+}
+function Retenu_a_la_source(categorie){
+
+if categorie=="Categorie A"){
+
+
+}
+
+
+}
+
+
+
+
+
+
+function enregistrement(){
+var t=document.getElementById("tableau");
+var tr=document.createElement("tr");
+var td1=document.createElement("td");
+var td2=document.createElement("td");
+var td3=document.createElement("td");
+var td4=document.createElement("td");
+tr.appendChild(td1);
+tr.appendChild(td2);
+tr.appendChild(td3);
+tr.appendChild(td4);
+t.appendChild(tr);
+return t
+
+}
+</script>
+</body>
+
+</html>
