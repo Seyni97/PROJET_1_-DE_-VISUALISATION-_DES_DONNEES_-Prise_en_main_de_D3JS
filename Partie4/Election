@@ -1,0 +1,111 @@
+	<!DOCTYPE html>
+	<html>
+
+	
+	<head>
+	<meta charset="utf-8">
+	<style>
+	.axis{
+	font:10px sans-serif;
+	fill:none;
+	stroke:#000;
+	shape-rendering : crispEdges;
+	}
+	
+
+	</style>
+	</head>
+	
+	<body>
+	
+	<script src="d3.js"></script>
+
+	
+	<script>
+	//Parametrage des dimensions
+	var margin = {top:0, right:150, bottom:90, left:100},
+	width = 1000, height = 500;
+	
+	//Mise en place du cadre de dessin
+	var svg = d3.select("body").append("svg")
+	.attr("width",width + margin.left + margin.right)
+	.attr("height",height + margin.top + margin.bottom)
+	.append("g")
+	.attr("transform","translate(" + margin.left + "." + margin.top + ")");
+	
+	var election = 
+	[{"candidat":"Macky SALL", "nom":"MackySall", "part":58.26},
+	{"candidat":"Idrissa SECK", "nom":"IdrissaSeck", "part":20.51},
+	{"candidat":"Ousmane SONKO", "nom":"OusmaneSonko", "part":15.67},
+	{"candidat":"Issa SALL", "nom":"IssaSall", "part":4.07},
+	{"candidat":"Madicke NIANG", "nom":"MadickeNiang", "part":1.48}];
+	var coloration=["brown","red","green","yellow","blue"];
+	var couleur=["Macky SALL","Idrissa SECK","Ousmane SONKO","Issa SALL","Madicke NIANG"];
+	//Mise en place des axes
+	var x = d3.scale.linear()
+	.range([0,width]);
+	
+	var y = d3.scale.ordinal()
+	.rangeRoundBands([height,0],0.10);
+	
+	var xAxis = d3.svg.axis()
+	.scale(x)
+	.orient("bottom");
+	
+	
+	var yAxis = d3.svg.axis()
+            .scale(y)
+            .tickSize(0)
+            .orient("left");
+	
+	election.forEach(function(d){
+		d.candidat = d.candidat;
+		d.part = +d.part;
+	});
+
+	y.domain(election.map(function(d){return d.candidat;}));
+	x.domain([0,d3.max(election, function(d){return d.part;})]);
+	
+	svg.append("g")
+	.attr("class","x axis")
+	.attr("transform","translate(0,"+height+")")
+	.call(xAxis);
+	
+	svg.append("g")
+	.attr("class","y axis")
+	.call(yAxis);
+	
+	//Representation des données en bande
+	var group = svg.append("g");
+	group.selectAll("bar")
+	.data(election)
+	.enter()
+	.append("rect")
+	.attr("class","bar")
+	.attr("y",function(d){return y(d.candidat);})
+	.attr("height",y.rangeBand())
+	.attr("x",0)
+	.attr("width",function(d){return x(d.part);})
+	.attr("fill",function(d,i){ return coloration[i]});
+	/// La Legende	
+	var legends = svg.append("g").attr("transform", "translate(950,50)")
+.selectAll(".legends").data(election);
+
+var legend = legends.enter().append("g").classed("label", true).attr
+("transform", function(d,i){return "translate(0," + (i+1)*30 + ")";});
+
+legend.append("rect").attr("width", 15).attr("height", 15).attr("fill", function(d,i){
+			return(coloration[i]) ;});
+
+
+legend.append("text").classed("label", true).text(function(d,i){return couleur[i];})
+ .attr("fill", function(d,i){
+			return(coloration[i]);})
+ .attr("x", 30)
+ .attr("y", 15);
+	
+	</script>
+	
+	</body>
+</html>
+
