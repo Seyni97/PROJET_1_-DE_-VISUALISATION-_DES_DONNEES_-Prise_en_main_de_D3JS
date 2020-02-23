@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Partie_1</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="../css/style.css">
+	<link rel="stylesheet" href="../css/bootstrap.css">
+	
+</head>
+<body>
+	<div class="row">
+		<div class="col-md-7" id="panneau" style="border-right: 2px solid black">
+			<h4>PANNEAU DE SAISIE</h4>
+			<form name="formulaire" method="post" action="">
+				<div class="row">
+					<label class="col-md-4" for="nom">Nom de l'envoyé</label>
+					<input type="text" name="text" class="form-control col-md-8" id="nom">
+				</div>
+				<div class="row">
+					<label class="col-md-4" for="select">Catégorie</label>
+					<select class="form-control col-md-8" id="selection">
+						<option id="categorieA" value="categorieA">Categorie A</option>
+						<option id="categorieB" value="categorieB">Categorie B</option>
+						<option id="categorieC" value="categorieC">Categorie C</option>
+					</select>
+				</div>
+				<div class="row">
+					<label class="col-md-4">Nombre d'heures</label>
+					<input type="number" name="heure" class="form-control col-md-8" min="0" id="heure">
+				</div>
+				<div class="row">
+					<label class="col-md-12">A t-il effectué des heures supplémentaires?</label><br/>
+					<label class="col-md-11" for="non">Non</label>
+					<input type="radio" value="Nom" for="fr" name='fr' class="form-radio col-md-1" id='oui'>					
+					<label class="col-md-11" for="oui">Oui</label>
+					<input type="radio" value="Oui" for="fr" name='fr' class="form-radio col-md-1" id="oui">
+				</div>
+				<div class="row form-group">
+					<label class="col-sm-4" id='lab'>Heures Supplémentaires</label>
+					<input type="number" name="text" class="form-control col-sm-8" min="0" id='hs'>
+				</div>
+				<div class="row">
+					<label class="col-md-4" >Avantages</label>
+					<input type="number" name="text" class="form-control col-md-8" id="av">
+				</div>
+				<div class="row" id="centrer">
+					<button class="btn btn-success col-md-2" id="ajout" type="button" onclick="ajouter();">Ajouter</button>
+					<label class="col-md-1"></label>
+					<button class="btn btn-danger col-md-2" id="annuler">Annuler</button>
+				</div>
+			</form>	
+		</div>
+		<div class="col-md-5" id="enregistrement">
+			<h4>ENREGISTREMENT</h4>
+			<div id="tab">
+				<table class="table table-striped" id="table">
+						<tr><td>Nom</td><td>Salaire</td><td>RAS</td><td>Salaire net</td></tr>	
+				</table>
+			</div>
+		</div>
+	</div>	
+	<script>
+function ajouter(){
+	var nom=document.getElementById("nom").value;
+	var categorie=document.getElementById("selection").value;
+	var heure=parseInt(document.getElementById("heure").value);
+	var oui=document.getElementById("oui").value;
+	var hs=parseInt(document.getElementById("hs").value);
+	var av=parseInt(document.getElementById("av").value);
+	
+	var sdb=salaire_de_base(heure,categorie);
+	var HS=Heure_supplementaire(hs,sdb)
+     var S=salaire(HS,sdb,av);
+	 var Ras=Retenu_a_la_source(categorie,S)
+	 var SN=salaire(HS,sdb,av)-Ras;
+	 enregistrement(nom,S,Ras,SN)
+	}
+
+function salaire_de_base(heure,categorie){
+if(categorie== "categorieA"){
+   var sdb=heure*10000;
+}
+if (categorie== "categorieB"){
+   var sdb=heure*7500;
+}
+if(categorie== "categorieC"){
+   var sdb=heure*5000;
+}
+   return sdb
+}
+function Heure_supplementaire(hs,sdb){
+ if (hs<=5) {
+ var HS=sdb+sdb*0.3*5;
+ } else {
+ var HS=sdb+sdb*0.3*5+sdb*0.45*hs-5;
+ }
+ return HS
+}
+function salaire(HS,sdb,av){
+var S=HS+sdb+av;
+return S
+}
+
+
+function Retenu_a_la_source(categorie,S){
+
+if (categorie=="categorieA"){
+
+var Ras=S*0.1;
+
+}
+if (categorie=="categorieB"){
+ var Ras=S*0.075;
+}
+if(categorie=="categorieC"){
+
+var Ras=S*0.05;
+}
+return Ras
+}
+function enregistrement(nom,S,Ras,SN){
+var t=document.getElementById("table");
+var tr=document.createElement("tr");
+var td1=document.createElement("td");
+td1.innerHTML=nom;
+var td2=document.createElement("td");
+td2.innerHTML=S;
+var td3=document.createElement("td");
+td3.innerHTML=Ras;
+var td4=document.createElement("td");
+td4.innerHTML=SN;
+tr.appendChild(td1);
+tr.appendChild(td2);
+tr.appendChild(td3);
+tr.appendChild(td4);
+t.appendChild(tr);
+}
+
+</script>
+</body>
+</html>

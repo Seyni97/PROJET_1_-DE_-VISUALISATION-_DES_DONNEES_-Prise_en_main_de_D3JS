@@ -94,9 +94,8 @@ body.append("h1")
 	var couleurs=["Dakar","Diourbel","Fatick","Kaffrine","Kaolack","Kedougou","Kolda","Louga","Matam","Saint-louis","Sedhiou","Tambacounda","Thies","Ziguinchor"]
 	//Mise en place des axes
 	var x = d3.scale.ordinal()
-		.rangeRoundBands([0,width],0.10);
+		.rangeRoundBands([0,width],0.05);
 
-	
 	var y = d3.scale.linear()
 	.range([height,0]);
 	
@@ -141,7 +140,6 @@ svg.append('text')
 	.style("stroke","blue")
     .text('Capitales Regionales')
 	
-	
 	//Representation des données en bande
 	var group = svg.append("g");
 	group.selectAll("bar")
@@ -156,10 +154,7 @@ svg.append('text')
 	.attr("fill",function(d,i){
 			return(couleur[i]);
 		});
-	
-
-			
-			
+				
 			var legends = svg.append("g").attr("transform", "translate(950,50)")
 .selectAll(".legends").data(region);
 
