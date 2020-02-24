@@ -89,6 +89,7 @@
 	.attr("x",0)
 	.attr("width",function(d){return x(d.part);})
 	.attr("fill",function(d,i){ return coloration[i]});
+	
 	/// La Legende	
 	var legends = svg.append("g").attr("transform", "translate(950,50)")
 .selectAll(".legends").data(election);

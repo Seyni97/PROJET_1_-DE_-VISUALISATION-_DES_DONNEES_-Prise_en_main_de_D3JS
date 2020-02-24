@@ -29,14 +29,14 @@
 				</div>
 				<div class="row">
 					<label class="col-md-12">A t-il effectué des heures supplémentaires?</label><br/>
-					<label class="col-md-11" for="oui" value="Oui">Oui</label>
-					<input type="radio" value="Oui" for="fr" name='fr' class="form-radio col-md-1" id="Oui">
+					<label class="col-md-11" for="oui" value="Oui" >Oui</label>
+					<input type="radio" value="Oui" for="fr" name='fr' class="form-radio col-md-1" id="Oui" onclick="afficher();">
 					<label class="col-md-11" for="non" value="Non">Non</label>
-					<input type="radio" value="Nom" for="fr" name='fr' class="form-radio col-md-1" id='Non'>					
+					<input type="radio" value="Nom" for="fr" name='fr' class="form-radio col-md-1" id='Non' onclick="masquer();"  >					
 				</div>
-				<div class="row form-group">
+				<div class="row form-group" id="supl" style="display:none" value="0">
 					<label class="col-sm-4" id='lab'>Heures Supplémentaires</label>
-					<input type="number" name="text" class="form-control col-sm-8" min="0" id='hs'>
+					<input type="number" name="text" class="form-control col-sm-8" min="0" id='hs' style="width:100px">
 				</div>
 				<div class="row">
 					<label class="col-md-4" >Avantages</label>
@@ -61,11 +61,23 @@
 		</div>
 	</div>	
 	<script>
+	function afficher(){
+	document.getElementById("supl").style.display="block";
+	}
+	function masquer(){
+	document.getElementById("supl").style.display="none";
+	document.getElementById("Non").value=0;
+
+	}
+	
+	</script>
+	<script>
 function ajouter(){
 	var nom=document.getElementById("nom").value;
 	var categorie=document.getElementById("selection").value;
 	var heure=parseInt(document.getElementById("heure").value);
 	var oui=document.getElementById("oui");
+	
 	var hs=parseInt(document.getElementById("hs").value);
 	var av=parseInt(document.getElementById("av").value);
 
@@ -92,8 +104,11 @@ if(categorie== "categorieC"){
 function Heure_supplementaire(hs,sdb){
  if (hs<=5) {
  var HS=sdb+sdb*0.3*5;
- } else {
+ } if(hs>5) {
  var HS=sdb+sdb*0.3*5+sdb*0.45*hs-5;
+ }
+ else{
+ var HS=0;
  }
  return HS
 }
@@ -135,6 +150,7 @@ tr.appendChild(td3);
 tr.appendChild(td4);
 t.appendChild(tr);
 }
+
 </script>
 </body>
 </html>
