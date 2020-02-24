@@ -170,14 +170,31 @@ var svg = d3.select("body")
 				.style("fill","gray")
 				.style("stroke","black")
 				.style("stroke-width","2");
-          var image=svg.append("img")
-		        .attr("x",1000)
-				.attr("y",500)
-				.attr("width",50)
-				.attr("height",50)
-				.style("fill","gray")
-				.style("stroke","black")
-				;
+				
+				/////// Chateau D'eau
+			var branche=svg.append("rect")
+			             .attr("x",970)
+						 .attr("y",477)
+						 .attr("width",10)
+						 .attr("height",75)
+						 .style("fill","brown");
+			var branche2=svg.append("rect")
+			             .attr("x",1075)
+						 .attr("y",477)
+						 .attr("width",10)
+						 .attr("height",75)
+						 .style("fill","brown");
+						 
+			var branche3=svg.append("rect")
+			             .attr("x",980)
+						 .attr("y",477)
+						 .attr("width",95)
+						 .attr("height",5)
+						 .style("stroke","brown")
+						 .style("fill","brown");
+						 
+						 
+						 //////
          var ellipse1=svg.append("ellipse")
 			            .attr("cx", 700)
 		                .attr("cy", 300)
@@ -197,23 +214,23 @@ var svg = d3.select("body")
 				.style("fill","green");
 		
 		var circle3 = svg.append("circle")
-                .attr("cx", 760)
-                .attr("cy", 250)
+                .attr("cx", 743)
+                .attr("cy", 260)
                 .attr("r", 25)
 				.style("fill","green");
 		var circle4 = svg.append("circle")
-                .attr("cx", 750)
-                .attr("cy", 350)
+                .attr("cx", 735)
+                .attr("cy", 345)
                 .attr("r", 25)
 				.style("fill","green");
 		var circle5 = svg.append("circle")
-                .attr("cx", 647)
-                .attr("cy", 250)
+                .attr("cx", 660)
+                .attr("cy", 260)
                 .attr("r", 25)
 				.style("fill","green");
 		var circle6 = svg.append("circle")
-                .attr("cx", 650)
-                .attr("cy", 350)
+                .attr("cx", 655)
+                .attr("cy", 345)
                 .attr("r", 25)
 				.style("fill","green");
 		var circle7 = svg.append("circle")
@@ -296,11 +313,5 @@ var svg = d3.select("body")
 					  .style("stroke","brown");
 	    
 </script>
- <line x1="0" y1="0" x2="450" y2="70"
-  style="stroke:rgb(255,0,0);stroke-width:2"/>
-  <line x1="0" y1="40" x2="160" y2="40"
-  style="stroke:rgb(255,0,0);stroke-width:2"/>
- </svg>
- </svg>
 </body>
 </html>

@@ -22,7 +22,7 @@
 	
 	<script>
 	//Parametrage des dimensions
-	var margin = {top:30, right:100, bottom:200, left:150},
+	var margin = {top:30, right:100, bottom:450, left:150},
 	width = 1000, height = 400;
 	
 	
@@ -50,7 +50,9 @@
 	
 	var xAxis = d3.svg.axis()
 	.scale(x)
-	.orient("bottom");
+	.orient("bottom")
+	.tickSize(10)
+;
 	
 	
 	var yAxis = d3.svg.axis()
