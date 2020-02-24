@@ -19,12 +19,12 @@
 	<body>
 	
 	<script src="d3.js"></script>
-
 	
 	<script>
 	//Parametrage des dimensions
-	var margin = {top:0, right:150, bottom:90, left:100},
-	width = 1000, height = 500;
+	var margin = {top:30, right:100, bottom:200, left:150},
+	width = 1000, height = 400;
+	
 	
 	//Mise en place du cadre de dessin
 	var svg = d3.select("body").append("svg")
@@ -39,14 +39,14 @@
 	{"candidat":"Ousmane SONKO", "nom":"OusmaneSonko", "part":15.67},
 	{"candidat":"Issa SALL", "nom":"IssaSall", "part":4.07},
 	{"candidat":"Madicke NIANG", "nom":"MadickeNiang", "part":1.48}];
-	var coloration=["brown","red","green","yellow","blue"];
+	var coloration=["brown","orange","red","green","blue"];
 	var couleur=["Macky SALL","Idrissa SECK","Ousmane SONKO","Issa SALL","Madicke NIANG"];
 	//Mise en place des axes
 	var x = d3.scale.linear()
 	.range([0,width]);
 	
 	var y = d3.scale.ordinal()
-	.rangeRoundBands([height,0],0.10);
+	.rangeRoundBands([height,0],0.1);
 	
 	var xAxis = d3.svg.axis()
 	.scale(x)
@@ -55,7 +55,7 @@
 	
 	var yAxis = d3.svg.axis()
             .scale(y)
-            .tickSize(0)
+            .tickSize(10)
             .orient("left");
 	
 	election.forEach(function(d){
@@ -103,6 +103,22 @@ legend.append("text").classed("label", true).text(function(d,i){return couleur[i
 			return(coloration[i]);})
  .attr("x", 30)
  .attr("y", 15);
+ 
+ svg.append('text')
+    .attr('x',-290)
+    .attr('y', -100)
+    .attr('transform', 'rotate(-90)')
+    .attr('text-anchor', 'middle')
+	.style("stroke","blue")
+    .text('Candidats')
+
+svg.append('text')
+    .attr('x', 480)
+    .attr('y', 550)
+    .attr('text-anchor', 'middle')
+	.style("stroke","blue")
+    .text('Resultat Obtenu en %')
+ 
 	
 	</script>
 	
