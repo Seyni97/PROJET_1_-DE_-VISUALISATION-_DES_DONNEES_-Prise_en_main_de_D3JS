@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Projet Visualisation - Exercice 5</title>
+	<meta charset="utf-8">
+	<script type="text/javascript" src="d3.js"></script>
+	<style type="text/css">
+		table, tr, td{
+			border: 1px solid black;
+			border-collapse: collapse;
+		}
+		td{			
+			padding-right: 10px;
+			padding-left: 10px;
+		}
+
+	</style>
+</head>
+<body>	
+<script type="text/javascript">
+		var tableau1 = d3.select("body").append("table").style("border-collapse","collapse");
+		var titres = tableau1.append("tr");
+		titres.selectAll("td").data(["","IDY", "MADICKE","MACKY","SONKO", "ISSA SALL"]).enter().append("td").text(function(d){return d;});
+
+
+		d3.csv("partie5.csv", function(data){
+
+			// TRANSFORMATION DES DONNEES EN TABLEAU
+			var donnees =  [
+				REGION	= data.REGION,
+				IDY		= data.IDY,
+				MADICKE	= data.MADICKE,
+				MACKY	= data.MACKY,
+				SONKO	= data.SONKO,
+				ISSASALL= data.ISSASALL,
+			];
+			
+			var lignes = tableau1.append("tr");
+			lignes.selectAll("td")
+			.data(donnees)
+			.enter()
+			.append("td")
+			.text(function(d){return d;})
+		});
+
+		</script>
+	</br></br>
+		<script type="text/javascript">
+		var tableau = d3.select("body").append("table").style("border-collapse","collapse");
+		var titres = tableau.append("tr");
+		titres.selectAll("td").data(["","IDY", "MADICKE","MACKY","SONKO", "ISSA SALL"]).enter().append("td").text(function(d){return d;});
+
+
+		d3.csv("partie5.csv", function(data){
+
+			// TRANSFORMATION DES DONNEES EN TABLEAU
+			var donnees =  [
+				REGION	= data.REGION,
+				IDY		= data.IDY,
+				MADICKE	= data.MADICKE,
+				MACKY	= data.MACKY,
+				SONKO	= data.SONKO,
+				ISSASALL= data.ISSASALL,
+			];
+			
+			var lignes = tableau.append("tr");
+			lignes.selectAll("td")
+			.data(donnees)
+			.enter()
+			.append("td")
+			.text(function(d){return d;})
+
+			/* 2) MISE EN FORME CONDITIONNELLE*/
+			.style("background-color",function(d){
+				if (d>=0 && d<=26500){
+					return "yellow";
+				}
+				if(d>26500 && d<=53000){
+					return "orange";
+				}
+				if(d>53000){return "green";}
+			});
+		});
+	</script>  
+            
+</body>
+</html>

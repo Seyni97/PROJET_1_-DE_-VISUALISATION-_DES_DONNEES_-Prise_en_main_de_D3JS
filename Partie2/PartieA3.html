@@ -1,0 +1,36 @@
+	<!DOCTYPE html>
+	<meta charset="utf-8">
+	<head>
+	<style>
+	
+	
+	
+	</style>
+	</head>
+	
+	<body>
+	
+	<script src="d3.js"></script>
+	<script>
+	var svg = d3.select("body").append("svg")
+	.attr("width",1000)
+	.attr("height",1000);
+	
+	var group = svg.append("g");
+	for(var i=0;i<3;i++)
+	{
+	group.append("rect")
+	.attr("x",20+100*i)
+	.attr("y",20)
+	.attr("width",20+45*i)
+	.attr("height",100)
+	.style("fill","yellow")
+	.style("stroke","blue")
+	.style("stroke-width","2");
+	}
+	
+
+	</script>
+	
+	</body>
+

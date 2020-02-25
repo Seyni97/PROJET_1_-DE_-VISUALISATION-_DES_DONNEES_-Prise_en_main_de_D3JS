@@ -1,0 +1,87 @@
+	<!DOCTYPE html>
+	<meta charset="utf-8">
+	
+	<head>
+	<style>
+	
+	
+	
+	</style>
+	</head>
+	
+	<body>
+	
+	<script src="d3.js"></script>
+
+	
+	<script>
+	// set the dimensions of the canvas
+
+	// add the SVG element
+	var svg = d3.select("body").append("svg")
+	.attr("width", 600)
+	.attr("width", 600);
+	
+	// Lignes
+	var jsonLine = [{ "x1": 10, "y1": 80, "x2": 80, "y2": 10, "color" : "blue" }];
+	
+	var ligne = svg.selectAll("line")
+	.data(jsonLine)
+	.enter()
+	.append("line");
+
+	var lineAttributes = ligne
+	.attr("x1", function (d) { return d.x1; })
+	.attr("x2", function (d) { return d.x2; })
+	.attr("y1", function (d) { return d.y1; })
+	.attr("y2", function (d) { return d.y2; })
+	.attr("stroke-width", 2)
+	.style("stroke", function(d) { return d.color; });	
+	
+	// Rectangle
+	var jsonRect = [{ "x": 100, "y": 10, "width": 50, "height": 50, "color" : "orange" }];
+	
+	var rect = svg.selectAll("rect")
+	.data(jsonRect)
+	.enter()
+	.append("rect");
+
+	var rectAttributes = rect
+	.attr("x", function (d) { return d.x; })
+	.attr("y", function (d) { return d.y; })
+	.attr("width", function (d) { return d.width; })
+	.attr("height", function (d) { return d.height; })
+	.style("fill", function(d) { return d.color; });
+	
+	// Cercle
+	var jsonCircles = [{ "x_axis": 200, "y_axis": 35, "radius": 35, "color" : "red"}];
+
+	var circles = svg.selectAll("circle").data(jsonCircles)
+	.enter()
+	.append("circle");
+
+	var circleAttributes = circles
+	.attr("cx", function (d) { return d.x_axis; })
+	.attr("cy", function (d) { return d.y_axis; })
+	.attr("r", function (d) { return d.radius; })
+	.style("fill", function(d) { return d.color; });
+	
+	
+	<!-- // Polyline -->
+	<!-- var jsonPolyline = [{ "points": 10 250 45 200 75 240 95 200 115 230 150 150, "stroke" : "red"}]; -->
+
+	<!-- var polyline = svg.selectAll("polyline").data(jsonPolyline) -->
+	<!-- .enter() -->
+	<!-- .append("polyline"); -->
+
+	<!-- var polylineAttributes = polyline -->
+	<!-- .attr("points", function (d) { return d.points; }) -->
+	<!-- .attr("stroke", function (d) { return d.stroke; }) -->
+	<!-- .style("stroke-width", 2); -->
+	
+
+		
+	</script>
+	
+	</body>
+
