@@ -19,7 +19,7 @@
 	</head>
 	
 	<body>
-	<marquee>Voici les resultats des elections presidentielles ! </marquee>
+	<marquee>Voici les resultats des elections presidentielles!</marquee>
 	<FORM NAME="Choix">
 <SELECT NAME="Liste" onChange="Lien()">
 <OPTION VALUE="">Choisir un candidat
@@ -27,7 +27,6 @@
 <OPTION VALUE="idy.html">Idrissa SECK
 <OPTION VALUE="sonko.html">Ousmane SONKO
 <OPTION VALUE="Madicke.html">Madicke NIANG
-
 </SELECT>
 </FORM>
 	<script src="d3.js"></script>
@@ -38,7 +37,6 @@
 	url = document.Choix.Liste.options[i].value;
 	parent.location.href = url;
 }
-	
 	</script>
 	
 	<script>
@@ -56,7 +54,7 @@
 	//Mise en place du cadre de dessin
 	var svg = d3.select("body").append("svg")
 	.attr("width",width + margin.left + margin.right)
-	.style("background-color","Snow")
+	.style("background-color","white")
 	.attr("height",height + margin.top + margin.bottom)
 	.append("g")
 	.attr("transform","translate(" + margin.left + "." + margin.top + ")");

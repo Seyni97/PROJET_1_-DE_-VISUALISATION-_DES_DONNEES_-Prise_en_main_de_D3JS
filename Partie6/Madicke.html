@@ -18,7 +18,7 @@
 	</head>
 	
 	<body>
-	<marquee>Voici les resultats des elections presidentielles ! </marquee>
+	<marquee>Voici les resultats de Madické Niang au niveau des differentes regions pour le compte des elections presidentielles ! </marquee>
 	<FORM NAME="Choix">
 <SELECT NAME="Liste" onChange="Lien()">
 <OPTION VALUE="">Choisir un candidat
@@ -55,18 +55,14 @@ body.append("h1")
 	//Mise en place du cadre de dessin
 	var svg = d3.select("body").append("svg")
 	.attr("width",width + margin.left + margin.right)
-	.style("background-color","Snow")
+	.style("background-color","white")
 	.attr("height",height + margin.top + margin.bottom)
 	.append("g")
 	.attr("transform","translate(" + margin.left + "." + margin.top + ")");
-	
-	
-	
-	
 	/// Colorer les candidats
 	var couleur=["green","yellow","red","blue","brown","orange","gray","pink","powderBlue","Coral","teal","silver","tomato","gray"];
 	
-    var region=
+var region=
 	[{"regions":"Dakar", "nom":"Dakar", "part":5646},
 	{"regions":"Diourbel", "nom":"Diourbel", "part":1682},
 	{"regions":"Fatick", "nom":"Fatick", "part":673},
@@ -81,7 +77,7 @@ body.append("h1")
 	{"regions":"Tambacounda", "nom":"Tambacounda", "part":1074 },
 	{"regions":"Thies", "nom":"Thies", "part":2312},
 	{"regions":"Ziguinchor", "nom":"Ziguinchor", "part":510}];
-var couleurs=["Dakar","Diourbel","Fatick","Kaffrine","Kaolack","Kedougou","Kolda","Louga","Matam","Saint-louis","Sedhiou","Tambacounda","Thies","Ziguinchor"]
+	var couleurs=["Dakar","Diourbel","Fatick","Kaffrine","Kaolack","Kedougou","Kolda","Louga","Matam","Saint-louis","Sedhiou","Tambacounda","Thies","Ziguinchor"]
 
 	//Mise en place des axes
 	var x = d3.scale.ordinal()
@@ -108,21 +104,29 @@ var couleurs=["Dakar","Diourbel","Fatick","Kaffrine","Kaolack","Kedougou","Kolda
 	x.domain(region.map(function(d){return d.regions;}));
 	y.domain([0,d3.max(region, function(d){return d.part;})]);
 	
+	
+	
+	//
 	svg.append("g")
-	.attr("class","x axis")
-	.attr("transform","translate(0,"+height+")")
-	.call(xAxis);
+        .attr("transform", "translate(0," + height + ")")
+        .call(xAxis.tickSize(0))
+        .selectAll("text")	
+            .style("text-anchor", "end")
+            .attr("dx", "-.8em")
+            .attr("dy", ".15em")
+            .attr("transform", "rotate(-65)");
+	
+	
+	
 	
 	svg.append("g")
 	.attr("class","y axis")
 	.call(yAxis);
 
-
-
-
-svg.append('text')
+	
+	svg.append('text')
     .attr('x',-500)
-    .attr('y', -80)
+    .attr('y', -70)
     .attr('transform', 'rotate(-90)')
     .attr('text-anchor', 'middle')
 	.style("stroke","blue")

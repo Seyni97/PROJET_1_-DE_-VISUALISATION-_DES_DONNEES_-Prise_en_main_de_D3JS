@@ -19,7 +19,7 @@
 	</head>
 	
 	<body>
-	<marquee>Voici les resultats des elections presidentielles ! </marquee>
+	<marquee>Voici les resultats du president sortant Macky Sall au niveau des differentes regions pour le compte des elections presidentielles! </marquee>
 	<FORM NAME="Choix">
 <SELECT NAME="Liste" onChange="Lien()">
 <OPTION VALUE="">Choisir un candidat
@@ -31,9 +31,8 @@
 </SELECT>
 </FORM>
 	<script src="d3.js"></script>
-
-	<script>
-	function Lien() {
+<script>
+	function Lien(){
 	i = document.Choix.Liste.selectedIndex;
 	if (i == 0) return;
 	url = document.Choix.Liste.options[i].value;
@@ -56,7 +55,7 @@
 	//Mise en place du cadre de dessin
 	var svg = d3.select("body").append("svg")
 	.attr("width",width + margin.left + margin.right)
-	.style("background-color","Snow")
+	.style("background-color","white")
 	.attr("height",height + margin.top + margin.bottom)
 	.append("g")
 	.attr("transform","translate(" + margin.left + "." + margin.top + ")");
@@ -78,8 +77,8 @@
 	{"regions":"Tambacounda", "nom":"Tambacounda", "part":46096},
 	{"regions":"Thies", "nom":"Thies", "part":100422},
 	{"regions":"Ziguinchor", "nom":"Ziguinchor", "part":32846}];
-var couleurs=["Dakar","Diourbel","Fatick","Kaffrine","Kaolack","Kedougou","Kolda","Louga","Matam","Saint-louis","Sedhiou","Tambacounda","Thies","Ziguinchor"]
-	
+	var couleurs=["Dakar","Diourbel","Fatick","Kaffrine","Kaolack","Kedougou","Kolda","Louga","Matam","Saint-louis","Sedhiou","Tambacounda","Thies","Ziguinchor"]
+
 	//Mise en place des axes
 	var x = d3.scale.ordinal()
 		.rangeRoundBands([0,width],0.10);
@@ -105,10 +104,20 @@ var couleurs=["Dakar","Diourbel","Fatick","Kaffrine","Kaolack","Kedougou","Kolda
 	x.domain(region.map(function(d){return d.regions;}));
 	y.domain([0,d3.max(region, function(d){return d.part;})]);
 	
+	
+	
+	//
 	svg.append("g")
-	.attr("class","x axis")
-	.attr("transform","translate(0,"+height+")")
-	.call(xAxis);
+        .attr("transform", "translate(0," + height + ")")
+        .call(xAxis.tickSize(0))
+        .selectAll("text")	
+            .style("text-anchor", "end")
+            .attr("dx", "-.8em")
+            .attr("dy", ".15em")
+            .attr("transform", "rotate(-65)");
+	
+	
+	
 	
 	svg.append("g")
 	.attr("class","y axis")
@@ -129,6 +138,7 @@ svg.append('text')
     .attr('text-anchor', 'middle')
 	.style("stroke","blue")
     .text('Capitales Regionales')
+	
 	//Representation des données en bande
 	var group = svg.append("g");
 	group.selectAll("bar")
@@ -160,6 +170,7 @@ legend.append("text").classed("label", true).text(function(d,i){return couleurs[
 			return(couleur[i]);})
  .attr("x", 30)
  .attr("y", 15);
+	
 	
 	</script>
 	
